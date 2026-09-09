@@ -10,9 +10,10 @@ from langchain_chroma import Chroma
 
 load_dotenv()
 
+
 DATA_DIR = "data"
 CHROMA_DIR = "chroma_db"
-COLLECTION_NAME = "pharma_knowledge"
+COLLECTION_NAME = "Defense_knowledge"
 
 def load_text(file_path: str):
     loader = TextLoader(file_path, encoding = "utf-8")

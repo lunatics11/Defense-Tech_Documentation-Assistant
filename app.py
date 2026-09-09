@@ -2,13 +2,13 @@ import streamlit as st
 from src.rag_graph import ask
 
 st.set_page_config(
-    page_title="Pharma knowldege RAG assitant",
-    page_icon="💊",
+    page_title="Defence Technical Documentation Assistant",
+    page_icon="🛰",
     layout="wide",
 )
 
-st.title("Pharma knowldege RAG Assitant")
-st.caption("Ask questions from pharma KT notes, DOI/SOH files, PDFs, CSVs, and product notes")
+st.title("Defence Technical Documentation Assistant")
+st.caption("Ask questions from technical manuals, engineering documentation, maintenance guides and research papers.")
 
 with st.sidebar:
     st.header("Project 1")
@@ -25,7 +25,7 @@ for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
 
-if prompt := st.chat_input("Ask pharma question..."):
+if prompt := st.chat_input("Ask a technical question…"):
     st.session_state.messages.append({"role": "user", "content": prompt})
 
     with st.chat_message("user"):

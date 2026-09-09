@@ -8,7 +8,7 @@ from langgraph.graph import StateGraph, START, END
 load_dotenv()
 
 CHROMA_DIR = "chroma_db"
-COLLECTION_NAME = "pharma_knowledge"
+COLLECTION_NAME = "Defense_knowledge"
 
 class RAGState(TypedDict):
     question: str
@@ -72,7 +72,7 @@ def answer_from_context(state: RAGState):
     llm = ChatOpenAI(model = "gpt-4o-mini", temperature=0)
 
     prompt = f"""
-You are Pharma Knowledge RAG Assistant.
+You are Defence Technical Documentation RAG Assistant.
 Rules:
 1. Answer only using the provided context.
 2. If the context does not support the answer, say: "I don't know from the provided sources."
@@ -89,7 +89,7 @@ Answer:
 
 def fallback_answer(state: RAGState):
     return{
-        "answer": "I don't know from the provided sources. Please add relevant KT notes, PDF, CSV, or Excel files to the data folder and re-run ingestion."
+        "answer": "I don't know from the provided sources. Please add relevant PDF, CSV, or Excel files to the data folder and re-run ingestion."
     }
 
 # conditional router logic in langgraph
