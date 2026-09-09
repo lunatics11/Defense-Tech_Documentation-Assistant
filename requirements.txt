@@ -1,6 +1,7 @@
 langchain # framework for building LLM apps and AI Workflows
 langchain-community # loaders, vector-stores, tools, etc
-langchain-google-genai
+langchain-google-genai>=2.1.0
+google-genai>=1.30.0
 langchain-huggingface
 sentence-transformers  #connect langchain with gemini models, embedding 
 langchain-chroma # langchain and chroma vector db

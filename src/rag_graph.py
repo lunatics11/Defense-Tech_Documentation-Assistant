@@ -44,7 +44,7 @@ def grade_relevance(state: RAGState):
     # combine all docs sepereate by double space lines
     context_txt = "\n\n".join(doc.page_content for doc in docs)
     llm = ChatGoogleGenerativeAI(
-        model="gemini-2.5-flash",
+        model="gemini-3.6-flash",
         temperature=0
     )
     prompt = f"""
@@ -77,7 +77,7 @@ def answer_from_context(state: RAGState):
         context_blocks.append(f"Source {i}: {source}\n{doc.page_content}")
     context_txt = "\n\n".join(context_blocks)
     llm = ChatGoogleGenerativeAI(
-        model="gemini-2.5-flash",
+        model="gemini-3.6-flash",
         temperature=0
     )
 
