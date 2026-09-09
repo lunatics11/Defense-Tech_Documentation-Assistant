@@ -1,6 +1,5 @@
-<<<<<<< HEADt
+Defence Engineering Knowledge Assistant
 =======
->>>>>>> b716a97 (Defence Engineering Knowledge Assistant)
 
 Goal: Build a chatbot that answers questions from Defence documents/data like inventory, SOH, DOI, sales, product notes, PDFs etc.
 
