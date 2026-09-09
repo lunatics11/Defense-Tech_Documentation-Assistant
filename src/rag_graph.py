@@ -43,7 +43,10 @@ def grade_relevance(state: RAGState):
 
     # combine all docs sepereate by double space lines
     context_txt = "\n\n".join(doc.page_content for doc in docs)
-    llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+    llm = ChatGoogleGenerativeAI(
+        model="gemini-2.5-flash",
+        temperature=0
+    )
     prompt = f"""
 You are grading whether retreived context is useful for answering a user question. 
 
