@@ -1,7 +1,8 @@
 from typing import List, TypedDict
 from dotenv import load_dotenv
 from langchain_core.documents import Document
-from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_chroma import Chroma
 from langgraph.graph import StateGraph, START, END
 
@@ -17,11 +18,14 @@ class RAGState(TypedDict):
     answer: str
 
 def get_vector_store():
-    embeddings = OpenAIEmbeddings(model = "text-embedding-3-small")
+    embeddings = HuggingFaceEmbeddings(
+        model_name="BAAI/bge-small-en-v1.5"
+    )
+
     return Chroma(
-        collection_name = COLLECTION_NAME, 
-        embedding_function = embeddings, 
-        persist_directory = CHROMA_DIR,
+        collection_name=COLLECTION_NAME,
+        embedding_function=embeddings,
+        persist_directory=CHROMA_DIR,
     )
 
 # retreival step for langgraph, in all vector DBs, searches for top 4 most similar 
@@ -69,7 +73,10 @@ def answer_from_context(state: RAGState):
         source = doc.metadata.get("source", "unknown source")
         context_blocks.append(f"Source {i}: {source}\n{doc.page_content}")
     context_txt = "\n\n".join(context_blocks)
-    llm = ChatOpenAI(model = "gpt-4o-mini", temperature=0)
+    llm = ChatGoogleGenerativeAI(
+        model="gemini-2.5-flash",
+        temperature=0
+    )
 
     prompt = f"""
 You are Defence Technical Documentation RAG Assistant.

@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from langchain_core.documents import Document
 from langchain_community.document_loaders import PyPDFLoader, TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_openai import OpenAIEmbeddings
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_chroma import Chroma
 
 load_dotenv()
@@ -41,7 +41,7 @@ Preview : {preview}
     
     docs.append(Document(
         page_content= content, 
-        meta_data = {"source": os.path.basename(file_path), "type" : "table"},
+        metadata = {"source": os.path.basename(file_path), "type" : "table"},
     ))
     return docs
 
@@ -70,7 +70,9 @@ def main():
     splitter = RecursiveCharacterTextSplitter(chunk_size = 800, chunk_overlap = 150)
     chunks = splitter.split_documents(docs)
     # convert text chunks into vector embeddings 
-    embeddings = OpenAIEmbeddings(model = "text-embedding-3-small")
+    embeddings = HuggingFaceEmbeddings(
+        model_name="BAAI/bge-small-en-v1.5"
+    )
     # Intialise chroma database, stores vectorised documents
     vector_store = Chroma(
         collection_name = COLLECTION_NAME,
